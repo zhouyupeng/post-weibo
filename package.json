@@ -1,0 +1,19 @@
+{
+  "name": "weibo_post",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ypzhou",
+  "license": "ISC",
+  "devDependencies": {
+    "node-schedule": "^1.3.2",
+    "puppeteer": "^1.13.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "querystring": "^0.2.0"
+  }
+}
