@@ -24,7 +24,7 @@ node index.js //或者使用nodejs高大上的部署方式-pm2。
 - 自动发送内容不同的图文微博；
 - 通过定时任务，实现周期性发微博任务。
 
-###效果图
+### 效果图
 ![此处输入图片的描述][2]
 图文内容我固定了，可自行使用第三方api获取要发送的内容或爬取第三方内容发送。（偷个懒...
 
@@ -36,7 +36,7 @@ node index.js //或者使用nodejs高大上的部署方式-pm2。
  2. 图片上传至微博图床获取PID。
  3. 发送微博。
 
-###登录
+### 登录
 登录可以使用[Puppeteer][4] node库,很轻松的实现登录获取微博cookie，这里不多介绍，可以自行搜索Puppeteer学习。
 
 > Puppeteer是谷歌官方出品的一个通过DevTools协议控制headless Chrome的Node库。可以通过Puppeteer的提供的api直接控制Chrome模拟大部分用户操作来进行UI Test或者作为爬虫访问页面来收集数据。
@@ -94,11 +94,11 @@ async function login(username, password) {
     })
 }
 ```
-###图片上传至微博图床
+### 图片上传至微博图床
 上传到微博图床可以看这里 [http://weibo.com/minipublish][5] 抓包看上传的接口过程，可以看到上传的是base64图片信息。所以上传前把图片转换成base64编码，而本地图片的编码和互联网链接图片的编码又不一样，这里使用的是互联网链接的图片，node本地图片转换成base64编码更简单些。上传成功后返回微博图床图片的pid。记住这个pid,发微博用的就是这个pid。
 
 
-###发送微博
+### 发送微博
 有了微博cookie和图片pid后就可以发微博了，多张图片时pid之间以|隔开的。
 
 ```
@@ -187,7 +187,7 @@ function loginTo() {
 }
 ```
 
-###参考
+### 参考
 
 > https://github.com/itibbers/weibo-post
 
