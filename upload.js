@@ -2,7 +2,7 @@ let http = require('http');
 const querystring = require('querystring')
 let axios = require('axios');
 
-let uploadUrl = 'http://picupload.service.weibo.com/interface/pic_upload.php?mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog'; //图片上传地址
+let uploadUrl = 'https://picupload.service.weibo.com/interface/pic_upload.php?mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog'; //图片上传地址
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 function getImage64(url) { //获取图片base64位信息
@@ -43,17 +43,24 @@ function getImage64(url) { //获取图片base64位信息
 
 async function uploadImg(imgUrl, cookie) {
 	let base64Img = await getImage64(imgUrl);
-	let upImgResp = await axios.post(uploadUrl, querystring.stringify({
-		b64_data: base64Img
-	}), {
-		withCredentials: true,
-		headers: {
-			"Cookie": cookie,
-			'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',
-		}
-	})
+	
+	try {
+	
+		let upImgResp = await axios.post(uploadUrl, querystring.stringify({
+			b64_data: base64Img
+		}), {
+			withCredentials: true,
+			headers: {
+				'Host': 'picupload.weibo.com',
+				'Origin': 'https://weibo.com',
+				"Cookie": cookie,
+				'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0',
+			}
+		})
 
-
+	} catch (error) {
+		console.error(error);
+	}
 		let {
 			data
 		} = JSON.parse(upImgResp.data.replace(/([\s\S]*)<\/script>/g, ''));
